@@ -6,14 +6,7 @@
 		"dev": "next dev --turbopack",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint",
-		"export": "next export"
-	},
-	"exports": {
-		".": {
-			"import": "./app/page.tsx",
-			"require": "./app/page.tsx"
-		}
+		"lint": "next lint"
 	},
 	"author": "Mohsen Fallahnejad",
 	"license": "MIT",

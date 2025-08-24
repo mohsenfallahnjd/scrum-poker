@@ -130,13 +130,15 @@ export default function ScrumPoker() {
 						<Card className="absolute inset-0 w-full h-full backface-hidden">
 							<CardContent
 								className="flex items-center justify-center w-full h-full bg-cover bg-center"
-								style={{ backgroundImage: "url('/cards/Cover-option-2.svg')" }}
+								style={{
+									backgroundImage: `url(${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/cards/Cover-option-2.svg)`,
+								}}
 							/>
 						</Card>
 						<Card className="absolute inset-0 w-full h-full backface-hidden transform rotate-y-180">
 							{/* eslint-disable-next-line @next/next/no-img-element */}
 							<img
-								src={`/cards/${card.src}`}
+								src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/cards/${card.src}`}
 								alt={card.alt}
 								style={{ marginTop: "1px" }}
 								className="w-full h-full object-contain rounded-lg"
@@ -155,7 +157,7 @@ export default function ScrumPoker() {
 							onClick={() => setFullscreenCard(null)}
 						>
 							<motion.img
-								src={`/cards/${cardValues[fullscreenCard].src}`}
+								src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/cards/${cardValues[fullscreenCard].src}`}
 								alt={cardValues[fullscreenCard].alt}
 								className="max-w-full"
 								style={{ maxHeight: "80vh" }}

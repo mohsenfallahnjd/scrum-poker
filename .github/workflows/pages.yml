@@ -1,4 +1,5 @@
 name: Deploy to GitHub Pages (Bun + Next.js)
+
 on:
   push:
     branches: [ main ]
@@ -19,10 +20,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # ✅ Use setup-bun v2 and pin an exact version (or set bun-version: latest)
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v2
         with:
-          bun-version: '1.2.x' # or pin a specific version
+          bun-version: 1.2.20
 
       - name: Install deps
         run: bun install --frozen-lockfile

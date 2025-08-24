@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages (Bun + Next.js)
 on:
   push:
     branches: [ main ]
@@ -18,22 +18,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: "22"
-          cache: "bun"
-      - run: bun install
-      - run: bun run build
-      - run: bun run export -o out
-      - uses: actions/upload-pages-artifact@v3
+          bun-version: '1.1.x' # or pin a specific version
+
+      - name: Install deps
+        run: bun install --frozen-lockfile
+
+      - name: Build Next.js
+        run: bun run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deploy.outputs.page_url }}
     steps:
-      - id: deployment
+      - id: deploy
         uses: actions/deploy-pages@v4
